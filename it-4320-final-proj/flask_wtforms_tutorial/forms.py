@@ -67,5 +67,29 @@ class AdminLoginForm(FlaskForm):
     password = StringField('Password', [DataRequired()])
     login = SubmitField("Login")
 
+def loadTakenSeats():
+    f = open("reservations.txt")
+    taken_seats = []
+    d = True
+    while d == True:
+        line = f.readline().replace("\n","")
+        if line == "":
+            d = False
+        else:
+            line_separated = line.split(',')
+            seats = [line_separated[1],line_separated[2]]
+            taken_seats.append(seats)
+    f.close()
+    return taken_seats
 
-
+def createSeatingChart(taken_seats):
+    seating = []
+    for x in range(12):
+        row = []
+        a = 0
+        for a in range(4):
+            row.append("O")
+        seating.append(row)
+    for x in taken_seats:
+        seating[int(x[0])][int(x[1])] = "X"
+    return seating
