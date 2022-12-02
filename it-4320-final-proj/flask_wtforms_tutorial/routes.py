@@ -30,6 +30,8 @@ def admin():
 def reservations():
 
     form = ReservationForm()
+    load = loadTakenSeats()
+    createChart = createSeatingChart(load)
 
-    return render_template("reservations.html", form=form, template="form-template")
+    return render_template("reservations.html", form=form, template="form-template", seatingChart=createChart)
 
