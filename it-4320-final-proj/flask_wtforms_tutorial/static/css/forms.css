@@ -142,3 +142,17 @@ i {
 .g-recaptcha div {
   margin: auto;
 }
+
+.seating-chart {
+  background-color: lightgrey;
+  border-radius: 10px;
+  padding: 20px;
+  width: 15%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.seating-chart p{
+  padding: 0px;
+  margin: 0px;
+}

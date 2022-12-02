@@ -7,7 +7,13 @@
 {% block content %}
 <div class="formwrapper">
   <h2 class="title">Reserve Your Seat</h2>
-  
+  <h3>Seating Chart</h3>
+  <p>X = Reserved seat : O = Open seat</p>
+  <div class="seating-chart">
+    {% for row in seatingChart %}
+      <p>{{ row }}</p>
+    {% endfor %}
+  </div>
   <form method="POST" action="/admin">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.first_name.label }} {{ form.first_name }}
