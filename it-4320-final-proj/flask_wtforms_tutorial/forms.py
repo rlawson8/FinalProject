@@ -93,3 +93,30 @@ def createSeatingChart(taken_seats):
     for x in taken_seats:
         seating[int(x[0])][int(x[1])] = "X"
     return seating
+
+def check_passcodes(username, password):
+    f = open("passcodes.txt", "r")
+    passcode_verified = False
+    passcodes = f.read().splitlines()
+    for line in passcodes:
+        line = line.split(",")
+        line[1] = line[1].lstrip()
+        if line[0] == username and line[1] == password:
+            passcode_verified = True
+            break
+    f.close()
+    return passcode_verified
+
+def create_reservation_code(first_name, last_name, row, seat):
+    INFOTC4320 = "INFOTC4320"
+    if len(first_name) < len(INFOTC4320):
+        difference = len(INFOTC4320) - len(first_name)
+        for x in range(difference):
+            first_name += " "
+    elif len(first_name) > len(INFOTC4320):
+        difference = len(first_name) - len(INFOTC4320)
+        for x in range(difference):
+            INFOTC4320 += " "
+    reservation_code = ''.join([''.join(t) for t in zip(first_name, INFOTC4320)])
+    reservation_code = reservation_code.replace(" ", "")
+    return reservation_code
