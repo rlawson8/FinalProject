@@ -23,7 +23,18 @@ def user_options():
 def admin():
 
     form = AdminLoginForm()
-
+    
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            username = request.form['username']
+            password = request.form['password']
+            passcode_verified = check_passcodes(username, password)
+            if passcode_verified:
+                err = None
+            else:
+                err = "Bad username/password combination. Try Again"
+            return render_template("admin.html", form=form, template="form-template", err = err)
+        
     return render_template("admin.html", form=form, template="form-template")
 
 @app.route("/reservations", methods=['GET', 'POST'])
@@ -33,5 +44,13 @@ def reservations():
     load = loadTakenSeats()
     createChart = createSeatingChart(load)
 
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            row = request.form['row']
+            seat = request.seat['seat']
+            reservation_code = create_reservation_code(first_name, last_name, row, seat)
+    
     return render_template("reservations.html", form=form, template="form-template", seatingChart=createChart)
 
