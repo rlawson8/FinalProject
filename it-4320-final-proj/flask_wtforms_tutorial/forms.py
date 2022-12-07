@@ -82,6 +82,11 @@ def loadTakenSeats():
     f.close()
     return taken_seats
 
+def addToFile(first_name, row, seat, reservation_code):
+    f = open("reservations.txt", "a")
+    f.write(first_name + ", " + row + ", " + seat + ", " + reservation_code + "\n")
+    f.close()
+
 def createSeatingChart(taken_seats):
     seating = []
     for x in range(12):
