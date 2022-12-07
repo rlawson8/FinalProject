@@ -86,6 +86,20 @@ def addToFile(first_name, row, seat, reservation_code):
     f = open("reservations.txt", "a")
     f.write(first_name + ", " + row + ", " + seat + ", " + reservation_code + "\n")
     f.close()
+    
+def checkIfSeatTaken(row, seat):
+    f = open("reservations.txt", "r")
+    lines = f.readlines()
+    seat_value = row + ", " + seat
+
+    for line in lines:
+        print(line)
+        if seat_value in line:
+            f.close()
+            return False
+        else:
+            f.close()
+            return True
 
 def createSeatingChart(taken_seats):
     seating = []
