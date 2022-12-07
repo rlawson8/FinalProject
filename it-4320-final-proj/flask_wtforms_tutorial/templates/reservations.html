@@ -15,6 +15,9 @@
       <p>{{ row }}</p>
     {% endfor %}
   </div>
+  {% if err %}
+    <p>{{ err }}</p>
+  {% endif %}
   <form method="POST" action="/reservations">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.first_name.label }} {{ form.first_name }}
