@@ -49,8 +49,10 @@ def reservations():
             first_name = request.form['first_name']
             last_name = request.form['last_name']
             row = request.form['row']
-            seat = request.seat['seat']
+            seat = request.form['seat']
             reservation_code = create_reservation_code(first_name, last_name, row, seat)
-    
+            addToFile(first_name, row, seat, reservation_code)
+
+
     return render_template("reservations.html", form=form, template="form-template", seatingChart=createChart)
 
