@@ -51,7 +51,15 @@ def reservations():
             row = request.form['row']
             seat = request.form['seat']
             reservation_code = create_reservation_code(first_name, last_name, row, seat)
-            addToFile(first_name, row, seat, reservation_code)
+            
+            seatTaken = checkIfSeatTaken(row, seat)
+            if seatTaken:
+                err = None
+                addToFile(first_name, row, seat, reservation_code)
+            else:
+                err = "Seat is already taken. Try Again"
+
+            return render_template("reservations.html", form=form, template="form-template", err = err, seatingChart=createChart)
 
 
     return render_template("reservations.html", form=form, template="form-template", seatingChart=createChart)
