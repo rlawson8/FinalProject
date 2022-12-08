@@ -139,3 +139,17 @@ def create_reservation_code(first_name, last_name, row, seat):
     reservation_code = ''.join([''.join(t) for t in zip(first_name, INFOTC4320)])
     reservation_code = reservation_code.replace(" ", "")
     return reservation_code
+
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
+def get_total_sales():
+    cost_matrix = get_cost_matrix()
+    total_cost = 0
+    with open("reservations.txt", "r") as reservations:
+        for reservation in reservations:
+            parsed = reservation.split(",")
+            total_cost += cost_matrix[int(parsed[1])][int(parsed[2])]
+    reservations.close()
+    return total_cost
